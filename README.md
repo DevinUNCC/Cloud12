@@ -1,2 +1,2 @@
 Cloud 12 Blog
-Authors: Brett Costner
+Authors: Brett Costner, Devin Williams
