@@ -1,3 +1,38 @@
 // Place all the styles related to the Articles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+input[type=text]
+{
+    transition: width 0.4s ease-in-out;
+    padding: 12px 40px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+input[type=text]:focus
+{
+    border: 3px solid #ccc;
+}
+
+input[type=button], input[type=submit]
+{
+    background-color: #4CAF50;
+    float: none;
+    border: none;
+    color: white;
+    padding: 16px 20px;
+    text-decoration:none;
+    cursor: pointer;
+}
+textarea
+{
+    width: 60%;
+    height: 150px;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
