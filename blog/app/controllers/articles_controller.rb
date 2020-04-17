@@ -13,10 +13,10 @@ class ArticlesController < ApplicationController
     
     def create
         @article = Article.new(article_params)
-        #byebug
+        # add current user in this controller for creating new articles
+        @article.user = current_user
         
         if @article.save
-            #byebug
             redirect_to @article
         else
             render 'new'

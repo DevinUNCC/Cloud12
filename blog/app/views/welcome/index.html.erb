@@ -1,2 +1,12 @@
 <h1>Hello, Blog App User!</h1>
 <%=link_to 'My Blog', controller: 'articles' %>
+
+<p>
+    <% if current_user %>
+        Logged in as <%= current_user.name %>
+        <%= link_to "Log Out", logout_path %>
+    <% else %>
+        <%= link_to "Sign Up", signup_path %> or
+        <%= link_to "Log In", login_path %>
+    <% end %>
+</p>

@@ -8,32 +8,11 @@
 </p>
 
 <h2>Comments</h2>
-<% @article.comments.each do |comment| %>
-    <p>
-        <strong>Commenter:</strong>
-        <!--Display the commenter-->
-        <%= comment.commenter %>
-    </p>
-    <p>
-        <strong>Comment:</strong>
-        <!--Display the Comment-->
-        <%= comment.body %>
-    </p>
-<% end %>
+<%= render @article.comments %>
 
 <h2>Add a comment:</h2>
-<!--Form for the comments-->
-<%= form_for([@article, @article.comments.build]) do |f| %>
-    <p>
-        <%= f.label :commenter %><br>
-        <%= f.text_field :commenter %>
-    </p>
-    <p>
-        <%= f.label :body %><br>
-        <%= f.text_area :body %>
-    </p>
-    <p>
-        <%= f.submit %>
-    </p>
-<% end %>
+<!--Form for the comments is at app/views/comments/_form.html.erb
+    Rails understands comments/form-->
+<%= render 'comments/form' %>
+
 <%= link_to 'Article List', articles_path %>

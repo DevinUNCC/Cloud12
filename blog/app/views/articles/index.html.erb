@@ -1,15 +1,28 @@
 <h1>Listing articles</h1>
+
 <%=link_to 'New article', new_article_path %>
+
 <table>
   <tr>
     <th>Title</th>
     <th>Text</th>
+    <!--To show evidence of the relationship between articles and user
+    we can display the author of the article-->
+    <th>Author</th>
+    <th>Time</th>
   </tr>
  
   <% @articles.each do |article| %>
     <tr>
       <td><%= article.title %></td>
       <td><%= article.text %></td>
+      <td><% if article.user %>
+            <!--display authors name if there is one-->
+            <%= article.user.name %>
+          <% end %>
+      </td>
+      <td><%= article.created_at.to_s(:rfc822) %></td>      
+      
       <td><%= link_to 'Show', article_path(article) %></td>
       <td><%= link_to 'Edit', edit_article_path(article) %></td>
       <td><%= link_to 'Destroy', 

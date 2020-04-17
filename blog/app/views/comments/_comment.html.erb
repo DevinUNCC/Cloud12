@@ -1,0 +1,19 @@
+<!--This file is a comment partial for all article comments-->
+
+<p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+</p>
+
+<p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+</p>
+
+<p>
+    <!--This link sends DELETE/articles/:article_id/comments/:id to Comments
+    to find the particular comment to be deleted passing these paramaters-->
+    <%= link_to 'Destroy Comment', [comment.article, comment],
+                method: :delete,
+                data: {confirm: 'Are you sure?' } %>
+</p>
