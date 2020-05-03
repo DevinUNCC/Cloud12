@@ -1,11 +1,13 @@
 <!--Put the new comment form with its own partial-->
 <%= form_for([@article, @article.comments.build]) do |f| %>
     <p>
-        <%= f.label :commenter %><br>
-        <%= f.text_field :commenter %>
+        <!--%= f.label :commenter %><br>-->
+        <%= f.hidden_field :commenter, :value=> current_user.name %>
+        <%= f.label current_user.name %>
+
     </p>
     <p>
-        <%= f.label :body %><br>
+        <!--%= f.label :body %><br>-->
         <%= f.text_area :body %>
     </p>
     <p>

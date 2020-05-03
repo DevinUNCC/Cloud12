@@ -27,7 +27,7 @@ input[type=button], input[type=submit]
 }
 textarea
 {
-    width: 60%;
+    width: 100%;
     height: 150px;
     padding: 12px 40px;
     box-sizing: border-box;
@@ -36,3 +36,11 @@ textarea
     background-color: #f8f8f8;
     resize: none;
 }
+
+  h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 3.4vw;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }

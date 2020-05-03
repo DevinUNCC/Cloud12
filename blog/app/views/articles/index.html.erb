@@ -5,7 +5,6 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Text</th>
     <!--To show evidence of the relationship between articles and user
     we can display the author of the article-->
     <th>Author</th>
@@ -16,7 +15,6 @@
   <% @articles.each do |article| %>
     <tr>
       <td><%= article.title %></td>
-      <td><%= article.text %></td>
       <td><% if article.user %>
             <!--display authors name if there is one-->
             <%= article.user.name %>

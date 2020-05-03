@@ -1,13 +1,17 @@
-<p>
-    <strong>Title:</strong>
+<h1>
     <%= @article.title %>
+</h1>
+<p>
+    <%= "Created by: " + @article.user.name + " at " + @article.created_at.to_s(:rfc822)%>
 </p>
 <p>
-    <strong>Text:</strong>
-    <%= @article.text %>
+    <%= simple_format(@article.text) %>
 </p>
-
-<h2>Comments</h2>
+<p>
+    <%= link_to 'Edit', edit_article_path(@article) %>
+    <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+</p>
+    <h3>-----------------------------------------</h3>
 <%= render @article.comments %>
 
 <h2>Add a comment:</h2>
