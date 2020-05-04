@@ -2,7 +2,7 @@
 
 <p>
     <!--<strong>Commenter:</strong>-->
-    <%= "Commented by: " + comment.commenter + " at " + comment.created_at.to_s(:rfc822) %>
+    <%= "Commented by: " + comment.commenter + " at " + comment.created_at.change(offset: "+04:00").to_s(:db) %>
 </p>
 
 <p>

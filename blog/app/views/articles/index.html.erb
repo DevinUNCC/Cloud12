@@ -3,7 +3,8 @@
 <%=link_to 'New article', new_article_path %>
 
 <% @articles = Article.all.order(:title)%>
-
+<% @articles = Article.all.order(:created_at)%>
+<% @articles = Article.all.reverse%>
 
 
 <table>
@@ -24,7 +25,7 @@
           <% end %>
       </td>
       <!--Timestamp for the creation of the article-->
-      <td><%= article.created_at.to_s(:rfc822) %></td>      
+      <td><%= article.created_at.change(offset: "+04:00").to_s(:db)%></td>      
       
       <td><%= link_to 'Show', article_path(article) %></td>
       <% begin %>

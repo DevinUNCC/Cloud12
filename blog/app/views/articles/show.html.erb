@@ -2,7 +2,7 @@
     <%= @article.title %>
 </h1>
 <p>
-    <%= "Created by: " + @article.user.name + " at " + @article.created_at.to_s(:rfc822)%>
+    <%= "Created by: " + @article.user.name + " at " + @article.created_at.change(offset: "+04:00").to_s(:db)%>
 </p>
 <p>
     <%= simple_format(@article.text) %>
