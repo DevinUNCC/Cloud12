@@ -10,6 +10,20 @@
   </head>
 
   <body>
+    <p id="hotbar">
+      <%=link_to 'My Blog', controller: 'articles' %>
+      <% begin %>
+      <%= link_to current_user.name, root_url %>
+      <% rescue %>
+      <%= link_to "Login", root_url %>
+      <% end %>
+      <% begin %>
+      <% if current_user.name == "Admin"%>
+      <%= link_to 'Back', users_path %>
+      <% end %>
+      <% rescue %>
+      <% end %>
+    </p>
     <%= yield %>
   </body>
 </html>

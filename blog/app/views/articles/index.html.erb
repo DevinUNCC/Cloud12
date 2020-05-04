@@ -2,6 +2,10 @@
 
 <%=link_to 'New article', new_article_path %>
 
+<% @articles = Article.all.order(:title)%>
+
+
+
 <table>
   <tr>
     <th>Title</th>
@@ -11,7 +15,6 @@
     <!--Add column for the article creation time-->
     <th>Time</th>
   </tr>
- 
   <% @articles.each do |article| %>
     <tr>
       <td><%= article.title %></td>
@@ -24,11 +27,16 @@
       <td><%= article.created_at.to_s(:rfc822) %></td>      
       
       <td><%= link_to 'Show', article_path(article) %></td>
+      <% begin %>
+      <% if current_user == article.user %>
       <td><%= link_to 'Edit', edit_article_path(article) %></td>
       <td><%= link_to 'Destroy', 
                                 article_path(article),
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+      <% rescue %>
+      <% end %>
     </tr>
   <% end %>
 </table>

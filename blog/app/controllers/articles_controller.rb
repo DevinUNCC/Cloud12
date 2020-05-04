@@ -49,3 +49,8 @@ private
     def article_params
         params.require(:article).permit(:title, :text)
     end
+
+private
+    def sort
+       params[:sort]
+    end

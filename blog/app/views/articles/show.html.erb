@@ -8,8 +8,13 @@
     <%= simple_format(@article.text) %>
 </p>
 <p>
+    <% begin %>
+    <% if current_user == @article.user %>
     <%= link_to 'Edit', edit_article_path(@article) %>
     <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <% rescue %>
+    <% end %>
 </p>
     <h3>-----------------------------------------</h3>
 <%= render @article.comments %>

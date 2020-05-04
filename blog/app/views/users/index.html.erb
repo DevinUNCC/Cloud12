@@ -17,8 +17,13 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= link_to 'Show', user %></td>
+        <% begin %>
+        <% if current_user == user %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        <% rescue %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
