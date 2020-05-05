@@ -1,7 +1,6 @@
 <!--This file is a comment partial for all article comments-->
 
 <p>
-    <!--<strong>Commenter:</strong>-->
     <%= "Commented by: " + comment.commenter + " at " + comment.created_at.change(offset: "+04:00").to_s(:db) %>
 </p>
 

@@ -2,14 +2,18 @@
     <%= @article.title %>
 </h1>
 <p>
+    <% begin %>
     <%= "Created by: " + @article.user.name + " at " + @article.created_at.change(offset: "+04:00").to_s(:db)%>
+    <% rescue %>
+    <%= "Created by: [deleted] at " + @article.created_at.change(offset: "+04:00").to_s(:db)%>
+    <% end %>
 </p>
 <p>
     <%= simple_format(@article.text) %>
 </p>
 <p>
     <% begin %>
-    <% if current_user == @article.user %>
+    <% if current_user == @article.user || current_user.name == "Admin" %>
     <%= link_to 'Edit', edit_article_path(@article) %>
     <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
@@ -19,9 +23,14 @@
     <h3>-----------------------------------------</h3>
 <%= render @article.comments %>
 
+<% begin %>
+<% if current_user.name != "" %>
 <h2>Add a comment:</h2>
 <!--Form for the comments is at app/views/comments/_form.html.erb
     Rails understands comments/form-->
 <%= render 'comments/form' %>
+<% end %>
+<% rescue %>
+<% end %>
 
 <%= link_to 'Article List', articles_path %>
