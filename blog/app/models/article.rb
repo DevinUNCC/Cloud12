@@ -12,4 +12,10 @@ class Article < ApplicationRecord
     # using @article.comments
     validates :title, presence: true, length: {minimum: 5}
     validates :text, presence: true, length: {minimum: 10}
+    
+     def self.search(search)
+     
+    where (['title LIKE ?', "%#{search}%"])
+    
+     end
 end
