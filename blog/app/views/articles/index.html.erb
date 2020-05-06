@@ -13,12 +13,16 @@
 <% end %>
   
 <h2>Favorite Articles</h2>
+<% begin %>
+<% if current_user.name != "" %>
 <% current_user.favorites.each do |article| %>
 <p>
   <%= link_to article.title, article_path(article) %>
 </p>
 <% end %>
-
+<% end %>
+<% rescue %>
+<% end %>
 <p>
   Sort by:
   <%= link_to "Newest", articles_path(order: 'created_at DESC') %>
