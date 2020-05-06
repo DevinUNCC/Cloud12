@@ -17,6 +17,7 @@ feature "Blogger creates an account" do
         fill_in "Email", with: "testemail@email.com"
         fill_in "Password", with: "password"
         click_button "Login"
+        click_link "My Blog"
         expect(page).to have_content("Listing articles")
     end
 end
