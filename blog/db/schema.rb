@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 2020_05_06_153056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
+<<<<<<< HEAD
+=======
+    t.index ["user_id"], name: "index_comments_on_user_id"
+>>>>>>> 590ce16b90ab79b71256c8143aa22210f4bec836
   end
 
   create_table "dislikes", force: :cascade do |t|

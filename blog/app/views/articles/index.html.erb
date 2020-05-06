@@ -7,6 +7,10 @@
 <% rescue %>
 <% end %>
 
+ <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+    <%= submit_tag "Search" %>
+  <% end %>
 
 <p>Sort by:
 <%= link_to "Newest", articles_path(order: 'created_at DESC') %>
