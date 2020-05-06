@@ -8,6 +8,8 @@ class ArticlesController < ApplicationController
                 @articles = Article.all.order('title')
             elsif params[:order] == 'created_at ASC'
                 @articles = Article.all.order('created_at ASC')
+            elsif params[:order] == 'rating'
+                @articles = Article.all.order(:likes)
             else
                 @articles = Article.all.reverse
             end 
