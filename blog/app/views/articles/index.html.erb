@@ -7,9 +7,12 @@
 <% rescue %>
 <% end %>
 
-<% @articles = Article.all.order(:title)%>
-<% @articles = Article.all.order(:created_at)%>
-<% @articles = Article.all.reverse%>
+
+<p>Sort by:
+<%= link_to "Newest", articles_path(order: 'created_at DESC') %>
+<%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
+<%= link_to "Title", articles_path(order: 'title') %>
+</p>
 
 <table>
   <% @articles.each do |article| %>
@@ -25,12 +28,15 @@
            at 
            <!--Timestamp for the creation of the article-->
       <%= article.created_at.change(offset: "+04:00").to_s(:db)%>
+      <%= ", " %> <%= article.likes.count %> <%= (article.likes.count) == 1 ? 'Like' : 'Likes'%>
+      <%= ", " %> <%= article.dislikes.count %> <%= (article.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'%>
       
-          <br>
+      
+          <br><br>
           <h3>
       <%= article.title %>
       </h3>
-      
+      <br><br>
       
       <td><%= link_to 'Show', article_path(article) %></td>
       <% begin %>

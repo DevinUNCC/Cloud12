@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   
   resources :articles do  #create a route for the comments model
     resources :comments
+    resources :likes
+    resources :dislikes
   end
   
   root 'welcome#index'

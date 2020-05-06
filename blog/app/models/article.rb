@@ -5,6 +5,8 @@ class Article < ApplicationRecord
     # This Class is associated with Comments class in a "has_many" relationship
     # dependent option of an association used to delete all comments when deleting article
     has_many :comments, dependent: :destroy
+    has_many :likes, dependent: :destroy
+    has_many :dislikes, dependent: :destroy
     
     # Adds the ability to display all comments asociated with an Article
     # using @article.comments

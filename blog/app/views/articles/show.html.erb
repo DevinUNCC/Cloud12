@@ -7,6 +7,8 @@
     <% rescue %>
     <%= "Created by: [deleted] at " + @article.created_at.change(offset: "+04:00").to_s(:db)%>
     <% end %>
+    <%= ", " %> <%= @article.likes.count %> <%= (@article.likes.count) == 1 ? 'Like' : 'Likes'%>
+    <%= ", " %> <%= @article.dislikes.count %> <%= (@article.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'%>
 </p>
 <p>
     <%= simple_format(@article.text) %>
@@ -32,5 +34,9 @@
 <% end %>
 <% rescue %>
 <% end %>
+
+
+<%= button_to 'Like', article_likes_path(@article), method: :article %>
+<%= button_to 'Dislike', article_dislikes_path(@article), method: :article %>
 
 <%= link_to 'Article List', articles_path %>
