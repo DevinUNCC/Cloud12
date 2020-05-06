@@ -12,11 +12,32 @@
 <%= link_to "Newest", articles_path(order: 'created_at DESC') %>
 <%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
 <%= link_to "Title", articles_path(order: 'title') %>
+<% begin %>
+<% if current_user.name != "" %>
+<%= link_to "Rating", articles_path(order: 'rating') %>
+<% end %>
+<% rescue %>
+<% end %>
 </p>
+
+
+
 
 <table>
   <% @articles.each do |article| %>
     <tr>
+      <% begin %>
+      <% if current_user.name != "" %>
+      <td style="text-align:center">
+        <p class = "rating">
+          <%= article.likes.count - article.dislikes.count %>
+        </p>
+        <%= button_to '∧', article_likes_path(article), method: :article %>
+        <%= button_to '∨', article_dislikes_path(article), method: :article %>
+      </td>
+      <% end %>
+      <% rescue %>
+      <% end %>
       <td>
         Posted by:
         <% if article.user %>
@@ -28,24 +49,18 @@
            at 
            <!--Timestamp for the creation of the article-->
       <%= article.created_at.change(offset: "+04:00").to_s(:db)%>
-      <%= ", " %> <%= article.likes.count %> <%= (article.likes.count) == 1 ? 'Like' : 'Likes'%>
-      <%= ", " %> <%= article.dislikes.count %> <%= (article.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'%>
-      
-      
-          <br><br>
-          <h3>
+      <br>
+      <p class = "Title">
       <%= article.title %>
-      </h3>
-      <br><br>
-      
-      <td><%= link_to 'Show', article_path(article) %></td>
+      </p>
+      <%= link_to 'Show', article_path(article) %>
       <% begin %>
       <% if current_user == article.user || current_user.name == "Admin" %>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
-      <td><%= link_to 'Destroy', 
+      <%= link_to 'Edit', edit_article_path(article) %>
+      <%= link_to 'Destroy', 
                                 article_path(article),
                                 method: :delete,
-                                data: { confirm: 'Are you sure?' } %></td>
+                                data: { confirm: 'Are you sure?' } %>
       <% end %>
       <% rescue %>
       <% end %>

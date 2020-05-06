@@ -7,13 +7,20 @@
     <% rescue %>
     <%= "Created by: [deleted] at " + @article.created_at.change(offset: "+04:00").to_s(:db)%>
     <% end %>
-    <%= ", " %> <%= @article.likes.count %> <%= (@article.likes.count) == 1 ? 'Like' : 'Likes'%>
-    <%= ", " %> <%= @article.dislikes.count %> <%= (@article.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'%>
 </p>
 <p>
     <%= simple_format(@article.text) %>
 </p>
+
 <p>
+    <% begin %>
+    <% if current_user.name != "" %>
+    <%= link_to '∧', article_likes_path(@article), method: :article %>
+    <%= @article.likes.count - @article.dislikes.count %>
+    <%= link_to '∨', article_dislikes_path(@article), method: :article %>
+    <% end %>
+    <% rescue %>
+    <% end %>
     <% begin %>
     <% if current_user == @article.user || current_user.name == "Admin" %>
     <%= link_to 'Edit', edit_article_path(@article) %>
@@ -25,18 +32,9 @@
     <h3>-----------------------------------------</h3>
 <%= render @article.comments %>
 
-<% begin %>
-<% if current_user.name != "" %>
 <h2>Add a comment:</h2>
 <!--Form for the comments is at app/views/comments/_form.html.erb
     Rails understands comments/form-->
 <%= render 'comments/form' %>
-<% end %>
-<% rescue %>
-<% end %>
-
-
-<%= button_to 'Like', article_likes_path(@article), method: :article %>
-<%= button_to 'Dislike', article_dislikes_path(@article), method: :article %>
 
 <%= link_to 'Article List', articles_path %>

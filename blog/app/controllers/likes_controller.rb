@@ -4,7 +4,7 @@ class LikesController < ApplicationController
   
   def create
     @article.likes.create()
-    redirect_to article_path(@article)
+    redirect_back(fallback_location: root_path)
   end
       
   
