@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2020_05_06_153056) do
-=======
-ActiveRecord::Schema.define(version: 2020_05_06_151416) do
->>>>>>> 8d2ded7345f2cf32a0babbeccd8f8a18fceb1d85
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
@@ -32,10 +28,6 @@ ActiveRecord::Schema.define(version: 2020_05_06_151416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
-<<<<<<< HEAD
-=======
-    t.index ["user_id"], name: "index_comments_on_user_id"
->>>>>>> 590ce16b90ab79b71256c8143aa22210f4bec836
   end
 
   create_table "dislikes", force: :cascade do |t|

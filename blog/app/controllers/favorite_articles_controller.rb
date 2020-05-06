@@ -10,7 +10,7 @@ class FavoritesController < ApplicationController
 
     def destroy
          Favorite.where(favorited_id: @article = Article.find(params[:id]), user_id: current_user.id).first.destroy
-         redirect_to @article, notice: 'Article unfavorited'
+         redirect_to @article, notice: 'Article Unfavorited'
     end
 
     private

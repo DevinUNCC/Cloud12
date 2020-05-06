@@ -7,31 +7,30 @@
 <% rescue %>
 <% end %>
 
- <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
-    <%= submit_tag "Search" %>
-  <% end %>
-  
- <h2>Favorite Articles</h2>
-<%  current_user.favorites.each do |article| %>
-  <p><%= article.title  %></p>
-  <% end %>
-
-  
-<p>Sort by:
-<%= link_to "Newest", articles_path(order: 'created_at DESC') %>
-<%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
-<%= link_to "Title", articles_path(order: 'title') %>
-<% begin %>
-<% if current_user.name != "" %>
-<%= link_to "Rating", articles_path(order: 'rating') %>
+<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+<%= submit_tag "Search" %>
 <% end %>
-<% rescue %>
-<% end %>
+  
+<h2>Favorite Articles</h2>
+<% current_user.favorites.each do |article| %>
+<p>
+  <%= link_to article.title, article_path(article) %>
 </p>
+<% end %>
 
-
-
+<p>
+  Sort by:
+  <%= link_to "Newest", articles_path(order: 'created_at DESC') %>
+  <%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
+  <%= link_to "Title", articles_path(order: 'title') %>
+  <% begin %>
+  <% if current_user.name != "" %>
+  <%= link_to "Rating", articles_path(order: 'rating') %>
+  <% end %>
+  <% rescue %>
+  <% end %>
+</p>
 
 <table>
   <% @articles.each do |article| %>
@@ -73,11 +72,9 @@
                                 data: { confirm: 'Are you sure?' } %>
       <% end %>
       <% if current_user %>
-  <%= link_to "favorite",   favorite_article_path(article, type: "favorite"), method: :put %>
-  <%= link_to "unfavorite", favorite_article_path(article, type: "unfavorite"), method: :put%>
- 
-<% end %>
-      
+      <%= link_to "Favorite", favorite_article_path(article, type: "favorite"), method: :put %>
+      <%= link_to "Unfavorite", favorite_article_path(article, type: "unfavorite"), method: :put%>
+      <% end %>
       <% rescue %>
       <% end %>
     </tr>
