@@ -1,6 +1,16 @@
 require 'rails_helper.rb'
 
 feature"Blogger adds an article" do
+    scenario "Blogger successfully creates a user account" do
+        visit signup_path
+        expect(page).to have_content("New User")
+        fill_in "Name", with: "user"
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        fill_in "Password confirmation", with: "password"
+        click_button "Create User"
+        expect(page).to have_content("user")
+    end
     scenario "Blogger successfully navigates to the new articles page from the listing articles page" do
         visit articles_path
         expect(page).to have_content("Listing articles")
