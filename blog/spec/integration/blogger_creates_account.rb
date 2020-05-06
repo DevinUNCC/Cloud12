@@ -17,5 +17,16 @@ feature "Blogger creates an account" do
         fill_in "Email", with: "testemail@email.com"
         fill_in "Password", with: "password"
         click_button "Login"
+        expect(page).to have_content("Listing articles")
+    end
+end
+feature "Blogger adds an Article" do
+    scenario "Blogger successfully navigates to the new articles page from the listing articles page" do
+        visit articles_path
+        expect(page).to have_content("Listing articles")
+        click_link "New article"
+        expect(page).to have_content("New Article")
+        expect(page).to have_field("Title")
+        expect(page).to have_field("Text")
     end
 end
