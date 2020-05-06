@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
   
+  resources :articles do
+    put :favorite, on: :member
+   
+  end
+  
   resources :articles do  #create a route for the comments model
     resources :comments
     resources :likes

@@ -11,6 +11,12 @@
 <% @articles = Article.all.order(:created_at)%>
 <% @articles = Article.all.reverse%>
 
+ <h2>Favorite Articles</h2>
+<%  current_user.favorites.each do |article| %>
+  <p><%= article.title  %></p>
+  
+<% end %>
+
 <table>
   <tr>
     <th>Title</th>
@@ -41,6 +47,11 @@
                                 article_path(article),
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' } %></td>
+      <td><% if current_user %>
+  <%= link_to "favorite",   favorite_article_path(article, type: "favorite"), method: :put %>
+  <%= link_to "unfavorite", favorite_article_path(article, type: "unfavorite"), method: :put%>
+ 
+<% end %></td>
       <% end %>
       <% rescue %>
       <% end %>

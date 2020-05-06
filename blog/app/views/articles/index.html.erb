@@ -11,7 +11,13 @@
     <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
     <%= submit_tag "Search" %>
   <% end %>
+  
+ <h2>Favorite Articles</h2>
+<%  current_user.favorites.each do |article| %>
+  <p><%= article.title  %></p>
+  <% end %>
 
+  
 <p>Sort by:
 <%= link_to "Newest", articles_path(order: 'created_at DESC') %>
 <%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
@@ -57,6 +63,12 @@
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' } %>
       <% end %>
+      <% if current_user %>
+  <%= link_to "favorite",   favorite_article_path(article, type: "favorite"), method: :put %>
+  <%= link_to "unfavorite", favorite_article_path(article, type: "unfavorite"), method: :put%>
+ 
+<% end %>
+      
       <% rescue %>
       <% end %>
     </tr>

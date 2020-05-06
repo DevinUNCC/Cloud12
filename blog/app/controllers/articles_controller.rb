@@ -26,6 +26,7 @@ class ArticlesController < ApplicationController
     
     def show
         @article = Article.find(params[:id])
+       
     end
     
     def new
@@ -64,9 +65,29 @@ class ArticlesController < ApplicationController
         
         redirect_to articles_path
     end
+    
+     def favorite
+        @article = Article.find params[:id]
+        type = params[:type]
+        
+        if type == "favorite"
+            current_user.favorites << @article
+            redirect_back fallback_location: @article, notice: "You favorited #{@article.title}"
+            
+        elsif type == "unfavorite"
+             current_user.favorites.delete(@article)
+             redirect_back fallback_location: @article, notice: "Unfavorited #{@article.title}"
+             
+             
+        else
+             redirect_back fallback_location: root_path, notice: "Nothing happened"
+             
+        end
+     end
+    
 end
 
 private
     def article_params
-        params.require(:article).permit(:title, :text)
+        params.require(:article).permit(:title, :text, :search, :favorite)
     end
