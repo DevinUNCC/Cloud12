@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     has_many :articles
     has_many :comments
+    has_many :favorite_articles
+    has_many :favorites, through: :favorite_articles, source: :article
     
     # VALID_EMAIL_REGEX = /A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     VALID_EMAIL_REGEX = /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

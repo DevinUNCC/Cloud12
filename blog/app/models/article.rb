@@ -7,7 +7,10 @@ class Article < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :likes, dependent: :destroy
     has_many :dislikes, dependent: :destroy
+    has_many :favorite_articles 
+    has_many :favorited_by, through: :favorite_articles, source: :user
     
+   
     # Adds the ability to display all comments asociated with an Article
     # using @article.comments
     validates :title, presence: true, length: {minimum: 5}
