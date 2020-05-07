@@ -12,12 +12,18 @@ feature "Blogger creates an account" do
         expect(page).to have_content("user")
     end
     scenario "Blogger log's in using credentials" do
+        visit signup_path
+        fill_in "Name", with: "user"
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        fill_in "Password confirmation", with: "password"
+        click_button "Create User"
         visit login_path
         expect(page).to have_content("Login")
         fill_in "Email", with: "testemail@email.com"
         fill_in "Password", with: "password"
         click_button "Login"
-        click_link "My Blog"
+    #    find("#logo").click
         expect(page).to have_content("Listing articles")
     end
 end
@@ -67,7 +73,7 @@ feature "Blogger deletes an Article" do
         click_button "Create Article"
         expect(page).to have_content("New Capybara Article")
         visit articles_path
-        click_link "Destroy"
+        click_link "Delete"
         expect(page).to have_no_content("New Capybara Article")
     end
 end
