@@ -66,7 +66,35 @@ feature "Blogger deletes an Article" do
         fill_in "Text", with: "This is a new Capybara article"
         click_button "Create Article"
         expect(page).to have_content("New Capybara Article")
-        click_link "Show"
-        
+        visit articles_path
+        click_link "Destroy"
+        expect(page).to have_no_content("New Capybara Article")
+    end
+end
+feature "Blogger adds comment to an article" do
+    scenario "Blogger successfully adds comment to an article" do
+        visit signup_path
+        fill_in "Name", with: "user"
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        fill_in "Password confirmation", with: "password"
+        click_button "Create User"
+        visit login_path
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        click_button "Login"
+        visit new_article_path
+        fill_in "Title", with: "New Capybara Article"
+        fill_in "Text", with: "This is a new Capybara article"
+        click_button "Create Article"
+        expect(page).to have_content("Add a comment:")
+        expect(page).to have_field("Body")
+  #      expect(page).to have_field(id, :type => 'textarea')
+        expect(page).to have_button("Create Comment")
+  #      fill_in "Commenter", with: "New Capybara Commenter"
+        fill_in "Body", with: "New Capybara Comment"
+        click_button "Create Comment"
+   #     expect(page).to have_content("New Capybara Commenter")
+        expect(page).to have_content("New Capybara Comment")
     end
 end
