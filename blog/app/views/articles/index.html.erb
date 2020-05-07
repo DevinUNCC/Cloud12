@@ -9,6 +9,7 @@
 <% if current_user.name != "" %>
 <% current_user.favorites.each do |article| %>
 <p>
+  <!--%= article.label :type %-->
   <%= link_to article.title, article_path(article) %>
 </p>
 <% end %>
