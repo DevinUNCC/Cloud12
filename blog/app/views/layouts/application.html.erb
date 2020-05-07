@@ -8,22 +8,37 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <p id="hotbar">
-      <%=link_to 'My Blog', controller: 'articles' %>
-      <% begin %>
-      <%= link_to current_user.name, root_url %>
-      <% rescue %>
-      <%= link_to "Login", root_url %>
+    <div id="hotbar">
+      <div id= "logo">
+        <%=link_to image_tag("logo.png"), controller: 'articles'%>
+      </div>
+      <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
+      <%= submit_tag "Search" %>
       <% end %>
+      <div id="new">
+        <% begin %>
+        <% if current_user.name != "" %>
+        <%= link_to '🖉', new_article_path %>
+        <% end %>
+        <% rescue %>
+        <% end %>
+      </div>
+      <div id="user">
+        <% begin %>
+        <%= link_to current_user.name, root_url %>
+        <% rescue %>
+        <%= link_to "Login", root_url %>
+        <% end %>
+      </div>
       <% begin %>
       <% if current_user.name == "Admin"%>
       <%= link_to 'Back', users_path %>
       <% end %>
       <% rescue %>
       <% end %>
-    </p>
+    </div>
     <%= yield %>
   </body>
 </html>

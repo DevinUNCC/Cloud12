@@ -1,16 +1,8 @@
 <h1>Listing articles</h1>
 
-<% begin %>
-<% if current_user.name != "" %>
-<%=link_to 'New article', new_article_path %>
-<% end %>
-<% rescue %>
-<% end %>
 
-<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Articles" %>
-<%= submit_tag "Search" %>
-<% end %>
+
+
   
 <h2>Favorite Articles</h2>
 <% begin %>
@@ -59,18 +51,15 @@
            at 
            <!--Timestamp for the creation of the article-->
       <%= article.created_at.change(offset: "+04:00").to_s(:db)%>
-            <%= ", " %> <%= article.likes.count %> <%= (article.likes.count) == 1 ? 'Like' : 'Likes'%>
-      <%= ", " %> <%= article.dislikes.count %> <%= (article.dislikes.count) == 1 ? 'Dislike' : 'Dislikes'%>
-
       <br>
       <p class = "Title">
       <%= article.title %>
-      </p>
+      </p> 
       <%= link_to 'Show', article_path(article) %>
       <% begin %>
       <% if current_user == article.user || current_user.name == "Admin" %>
       <%= link_to 'Edit', edit_article_path(article) %>
-      <%= link_to 'Destroy', 
+      <%= link_to 'Delete', 
                                 article_path(article),
                                 method: :delete,
                                 data: { confirm: 'Are you sure?' } %>
@@ -81,6 +70,10 @@
       <% end %>
       <% rescue %>
       <% end %>
+      <br>
+      <div class = "Text">
+      <%= article.text %>
+      </div>
     </tr>
   <% end %>
 </table>

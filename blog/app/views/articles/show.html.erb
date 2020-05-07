@@ -29,6 +29,7 @@
     <% rescue %>
     <% end %>
 </p>
+<br>
     <h3>-----------------------------------------</h3>
 <%= render @article.comments %>
 
@@ -36,5 +37,5 @@
 <!--Form for the comments is at app/views/comments/_form.html.erb
     Rails understands comments/form-->
 <%= render 'comments/form' %>
-
+<br>
 <%= link_to 'Article List', articles_path %>
