@@ -1,27 +1,19 @@
 class ArticlesController < ApplicationController
     def index
         @articles = Article.all.order(:created_at).reverse
-
             if params[:order] == 'created_at DESC'
                 @articles = Article.all.order('created_at DESC')
             elsif params[:order] == 'title'
                 @articles = Article.all.order('title')
             elsif params[:order] == 'created_at ASC'
                 @articles = Article.all.order('created_at ASC')
-            elsif params[:order] == 'rating'
-                @articles = Article.all.order(:likes)
             else
                 @articles = Article.all.reverse
-            end 
+            end
             
-            @articles = Article.all
-        
         if params[:search]
-        @articles = Article.search(params[:search]).order("created_at DESC")
-        else
-        @articles = Article.all.order('created_at DESC')
+        @articles = Article.search(params[:search])
         end
-            
     end
     
     def show
