@@ -40,7 +40,6 @@ feature "Blogger adds an Article" do
         visit login_path
         fill_in "Email", with: "testemail@email.com"
         fill_in "Password", with: "password"
-#        expect(page).to have_content("Hello, Blog App User!")
         click_button "Login"
         visit new_article_path
         fill_in "Title", with: "New Capybara Article"
@@ -52,6 +51,22 @@ feature "Blogger adds an Article" do
 end
 feature "Blogger deletes an Article" do
     scenario "Blogger successfully deletes an Article" do
+        visit signup_path
+        fill_in "Name", with: "user"
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        fill_in "Password confirmation", with: "password"
+        click_button "Create User"
+        visit login_path
+        fill_in "Email", with: "testemail@email.com"
+        fill_in "Password", with: "password"
+        click_button "Login"
+        visit new_article_path
+        fill_in "Title", with: "New Capybara Article"
+        fill_in "Text", with: "This is a new Capybara article"
+        click_button "Create Article"
+        expect(page).to have_content("New Capybara Article")
+        click_link "Show"
         
     end
 end
