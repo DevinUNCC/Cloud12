@@ -33,10 +33,14 @@
     <h3>-----------------------------------------</h3>
     <br>
 <%= render @article.comments %>
-
+<% begin %>
+<% if current_user.name != "" %>
 <h2>Add a comment:</h2>
 <!--Form for the comments is at app/views/comments/_form.html.erb
     Rails understands comments/form-->
 <%= render 'comments/form' %>
 <br>
+<% end %>
+<% rescue %>
+<% end %>
 <%= link_to 'Article List', articles_path %>
