@@ -1,9 +1,5 @@
 <h1>Listing articles</h1>
 
-
-
-
-  
 <h2>Favorite Articles</h2>
 <% begin %>
 <% if current_user.name != "" %>
@@ -23,8 +19,6 @@
   <%= link_to "Oldest", articles_path(order: 'created_at ASC') %>
   <%= link_to "Title", articles_path(order: 'title') %>
 </p>
-
-
 
 <table>
   <% @articles.each do |article| %>

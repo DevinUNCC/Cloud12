@@ -12,7 +12,7 @@
     <!--This link sends DELETE/articles/:article_id/comments/:id to Comments
     to find the particular comment to be deleted passing these paramaters-->
     <% begin %>
-    <% if current_user.name == comment.commenter %>
+    <% if current_user.name == comment.commenter || current_user.name == "Admin" %>
     <%= link_to 'Delete', [comment.article, comment],
                 method: :delete,
                 data: {confirm: 'Are you sure?' } %>
